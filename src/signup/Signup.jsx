@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useSignup } from '../hooks/useSignup'
 
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName , setDisplayName] = useState("")
+  const {error, isPending, signup} = useSignup()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password , displayName);
+    signup(email, password , displayName);
   };
 
   return (
@@ -58,9 +60,13 @@ function Signup() {
               }}
             />
           </label>
-          <button className="border-2 border-emerald-500 px-3 py-1 rounded text-[13px] hover:bg-emerald-500 hover:text-white">
+          {!isPending && <button className="border-2 border-emerald-500 px-3 py-1 rounded text-[13px] hover:bg-emerald-500 hover:text-white">
             Signup
-          </button>
+          </button>}
+          {isPending && <button className="border-2 border-emerald-500 px-3 py-1 rounded text-[13px] hover:bg-emerald-500 hover:text-white" disabled>
+            Loading...
+          </button>}
+          {error && <div>{error}</div>}
         </form>
       </div>
     </div>
