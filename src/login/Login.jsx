@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const {login, error, isPending} = useLogin()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(email, password)
+    login(email, password)
   }
 
   return (
@@ -39,7 +41,9 @@ function Login() {
               onChange={(e) => {setPassword(e.target.value)}}
             />
           </label>
-          <button className="border-2 border-emerald-500 px-3 py-1 rounded text-[13px] hover:bg-emerald-500 hover:text-white">Login</button>
+          {isPending && <button className="border-2 border-emerald-500 px-3 py-1 rounded text-[13px] hover:bg-emerald-500 hover:text-white" disabled>Loading...</button>}
+          {!isPending && <button className="border-2 border-emerald-500 px-3 py-1 rounded text-[13px] hover:bg-emerald-500 hover:text-white">Login</button>}
+          {error && <div className="mt-3 text-sm">{error}</div>}
         </form>
       </div>
     </div>
