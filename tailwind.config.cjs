@@ -309,6 +309,10 @@ module.exports = {
         'system-ui',
         '-apple-system',
       ],
+      projectFont2: [
+        'Sacramento',
+        'cursive'
+      ],
       sans: [
         'ui-sans-serif',
         'system-ui',
