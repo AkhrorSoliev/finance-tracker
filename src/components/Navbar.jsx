@@ -6,7 +6,6 @@ import { useAuthContext } from '../hooks/useAuthContext'
 function Navbar() {
   const { logout } = useLogout()
   const {user} = useAuthContext()
-  console.log(user)
   return (
     <div className='bg-emerald-100 py-3 px-8'>
         <div className='max-w-screen-md mx-auto flex items-center justify-between'>
